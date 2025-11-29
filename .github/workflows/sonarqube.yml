@@ -20,13 +20,16 @@ jobs:
         with:
           go-version: '1.21'
       
-      - name: Clean up old test database
-        working-directory: ./golang-gin-realworld-example-app
-        run: rm -f gorm_test.db
+      - name: Clean up all test databases
+        run: |
+          find . -name "gorm_test.db" -type f -delete || true
+          rm -f golang-gin-realworld-example-app/gorm_test.db || true
+          rm -f gorm_test.db || true
       
       - name: Run tests with coverage
         working-directory: ./golang-gin-realworld-example-app
         run: |
+          rm -f gorm_test.db || true
           go test ./... -coverprofile=coverage.out
           go tool cover -func=coverage.out
       
