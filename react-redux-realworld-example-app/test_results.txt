@@ -1,0 +1,33 @@
+
+> react-redux-realworld-example-app@0.1.0 test
+> cross-env PORT=4100 react-scripts test --env=jsdom
+
+ PASS  src/middleware.test.js
+  ● Console
+
+    console.log src/middleware.js:23
+      RESULT { data: 'test' }
+    console.log src/middleware.js:23
+      RESULT { article: { title: 'Test' } }
+    console.log src/middleware.js:33
+      ERROR { response: { body: { errors: [Object] } } }
+    console.log src/middleware.js:23
+      RESULT { article: { title: 'Test' } }
+    console.log src/middleware.js:33
+      ERROR Error: Network error
+          at Object.<anonymous> (/home/namgyel/Desktop/SEM5/SWE302/SS2025_SWE302/Assignment/react-redux-realworld-example-app/src/middleware.test.js:155:19)
+          at Object.asyncFn (/home/namgyel/Desktop/SEM5/SWE302/SS2025_SWE302/Assignment/react-redux-realworld-example-app/node_modules/jest-jasmine2/build/jasmine-async.js:68:30)
+          at /home/namgyel/Desktop/SEM5/SWE302/SS2025_SWE302/Assignment/react-redux-realworld-example-app/node_modules/jest-jasmine2/build/queueRunner.js:38:12
+          at new Promise (<anonymous>)
+          at mapper (/home/namgyel/Desktop/SEM5/SWE302/SS2025_SWE302/Assignment/react-redux-realworld-example-app/node_modules/jest-jasmine2/build/queueRunner.js:31:21)
+          at /home/namgyel/Desktop/SEM5/SWE302/SS2025_SWE302/Assignment/react-redux-realworld-example-app/node_modules/p-map/index.js:46:16
+
+ PASS  src/reducers/articleList.test.js
+ PASS  src/reducers/editor.test.js
+ PASS  src/reducers/auth.test.js
+
+Test Suites: 4 passed, 4 total
+Tests:       51 passed, 51 total
+Snapshots:   0 total
+Time:        0.411s, estimated 1s
+Ran all test suites.
