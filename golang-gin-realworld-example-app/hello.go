@@ -3,13 +3,14 @@ package main
 import (
 	"fmt"
 
-	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 
-	"github.com/jinzhu/gorm"
 	"realworld-backend/articles"
 	"realworld-backend/common"
 	"realworld-backend/users"
+
+	"github.com/jinzhu/gorm"
 )
 
 func Migrate(db *gorm.DB) {
@@ -36,6 +37,36 @@ func main() {
 		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
 		AllowCredentials: true,
 	}))
+
+	// Security Headers Middleware
+	r.Use(func(c *gin.Context) {
+		// Prevent clickjacking attacks
+		c.Header("X-Frame-Options", "DENY")
+
+		// Prevent MIME type sniffing
+		c.Header("X-Content-Type-Options", "nosniff")
+
+		// Enable XSS protection
+		c.Header("X-XSS-Protection", "1; mode=block")
+
+		// Content Security Policy
+		c.Header("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' http://localhost:3000")
+
+		// Permissions Policy (formerly Feature-Policy)
+		c.Header("Permissions-Policy", "geolocation=(), microphone=(), camera=()")
+
+		// Referrer Policy
+		c.Header("Referrer-Policy", "strict-origin-when-cross-origin")
+
+		// Remove server information leak
+		c.Header("X-Powered-By", "")
+		c.Header("Server", "")
+
+		// HTTPS Strict Transport Security (for production)
+		// c.Header("Strict-Transport-Security", "max-age=31536000; includeSubDomains")
+
+		c.Next()
+	})
 
 	v1 := r.Group("/api")
 	users.UsersRegister(v1.Group("/users"))
@@ -72,11 +103,10 @@ func main() {
 	//db.Save(&ArticleUserModel{
 	//    UserModelID:userA.ID,
 	//})
-	//var userAA ArticleUserModel
 	//db.Where(&ArticleUserModel{
 	//    UserModelID:userA.ID,
 	//}).First(&userAA)
 	//fmt.Println(userAA)
 
-	r.Run() // listen and serve on 0.0.0.0:8080
+	r.Run(":3000") // listen and serve on 0.0.0.0:3000
 }

@@ -1,11 +1,12 @@
 package users
 
 import (
-	"github.com/golang-jwt/jwt/v5"
-	"realworld-backend/common"
-	"github.com/gin-gonic/gin"
 	"net/http"
+	"realworld-backend/common"
 	"strings"
+
+	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt/v5"
 )
 
 // Extract token from Authorization header or query parameter
@@ -15,13 +16,13 @@ func extractToken(c *gin.Context) string {
 	if len(bearerToken) > 6 && strings.ToUpper(bearerToken[0:6]) == "TOKEN " {
 		return bearerToken[6:]
 	}
-	
+
 	// Try query parameter
 	token := c.Query("access_token")
 	if token != "" {
 		return token
 	}
-	
+
 	return ""
 }
 
@@ -37,11 +38,12 @@ func UpdateContextUserModel(c *gin.Context, my_user_id uint) {
 }
 
 // You can custom middlewares yourself as the doc: https://github.com/gin-gonic/gin#custom-middleware
-//  r.Use(AuthMiddleware(true))
+//
+//	r.Use(AuthMiddleware(true))
 func AuthMiddleware(auto401 bool) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		UpdateContextUserModel(c, 0)
-		
+
 		tokenString := extractToken(c)
 		if tokenString == "" {
 			if auto401 {
@@ -49,7 +51,7 @@ func AuthMiddleware(auto401 bool) gin.HandlerFunc {
 			}
 			return
 		}
-		
+
 		token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 			// Validate the alg is what we expect
 			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
@@ -57,14 +59,14 @@ func AuthMiddleware(auto401 bool) gin.HandlerFunc {
 			}
 			return []byte(common.NBSecretPassword), nil
 		})
-		
+
 		if err != nil {
 			if auto401 {
 				c.AbortWithStatus(http.StatusUnauthorized)
 			}
 			return
 		}
-		
+
 		if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 			my_user_id := uint(claims["id"].(float64))
 			UpdateContextUserModel(c, my_user_id)

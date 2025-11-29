@@ -1,0 +1,25 @@
+nohup: ignoring input
+
+> react-redux-realworld-example-app@0.1.0 start
+> cross-env PORT=4100 react-scripts start
+
+(node:242571) [DEP0111] DeprecationWarning: Access to process.binding('http_parser') is deprecated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:242571) [DEP0111] DeprecationWarning: Access to process.binding('http_parser') is deprecated.
+Starting the development server...
+
+(node:242571) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+Compiled successfully!
+
+You can now view react-redux-realworld-example-app in the browser.
+
+  Local:            http://localhost:4100/
+  On Your Network:  http://10.2.28.163:4100/
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+Error: ENOTDIR: not a directory, stat '/home/namgyel/Desktop/SEM5/SWE302/Assignment/react-redux-realworld-example-app/public/favicon.ico/'
+Error: ENOTDIR: not a directory, stat '/home/namgyel/Desktop/SEM5/SWE302/Assignment/react-redux-realworld-example-app/public/favicon.ico/9zysz/v1zb2'
+Compiling...
+Compiled successfully!

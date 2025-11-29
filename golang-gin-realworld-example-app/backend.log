@@ -1,0 +1,42 @@
+nohup: ignoring input
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/users/               --> realworld-backend/users.UsersRegistration (5 handlers)
+[GIN-debug] POST   /api/users/login          --> realworld-backend/users.UsersLogin (5 handlers)
+[GIN-debug] GET    /api/articles/            --> realworld-backend/articles.ArticleList (6 handlers)
+[GIN-debug] GET    /api/articles/:slug       --> realworld-backend/articles.ArticleRetrieve (6 handlers)
+[GIN-debug] GET    /api/articles/:slug/comments --> realworld-backend/articles.ArticleCommentList (6 handlers)
+[GIN-debug] GET    /api/tags/                --> realworld-backend/articles.TagList (6 handlers)
+[GIN-debug] GET    /api/user/                --> realworld-backend/users.UserRetrieve (7 handlers)
+[GIN-debug] PUT    /api/user/                --> realworld-backend/users.UserUpdate (7 handlers)
+[GIN-debug] GET    /api/profiles/:username   --> realworld-backend/users.ProfileRetrieve (7 handlers)
+[GIN-debug] POST   /api/profiles/:username/follow --> realworld-backend/users.ProfileFollow (7 handlers)
+[GIN-debug] DELETE /api/profiles/:username/follow --> realworld-backend/users.ProfileUnfollow (7 handlers)
+[GIN-debug] POST   /api/articles/            --> realworld-backend/articles.ArticleCreate (7 handlers)
+[GIN-debug] PUT    /api/articles/:slug       --> realworld-backend/articles.ArticleUpdate (7 handlers)
+[GIN-debug] DELETE /api/articles/:slug       --> realworld-backend/articles.ArticleDelete (7 handlers)
+[GIN-debug] POST   /api/articles/:slug/favorite --> realworld-backend/articles.ArticleFavorite (7 handlers)
+[GIN-debug] DELETE /api/articles/:slug/favorite --> realworld-backend/articles.ArticleUnfavorite (7 handlers)
+[GIN-debug] POST   /api/articles/:slug/comments --> realworld-backend/articles.ArticleCommentCreate (7 handlers)
+[GIN-debug] DELETE /api/articles/:slug/comments/:id --> realworld-backend/articles.ArticleCommentDelete (7 handlers)
+[GIN-debug] GET    /api/ping/                --> main.main.func2 (5 handlers)
+{0 AAAAAAAAAAAAAAAA aaaa@g.cn hehddeda <nil> }
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :3000
+
+[35m(/home/namgyel/Desktop/SEM5/SWE302/Assignment/golang-gin-realworld-example-app/hello.go:98)[0m 
+[33m[2025-11-30 02:20:56][0m [31;1m UNIQUE constraint failed: user_models.email [0m
+[GIN-debug] redirecting request 301: /api/tags/ --> /api/tags/
+[GIN-debug] redirecting request 301: /api/tags/ --> /api/tags/
+[GIN] 2025/11/30 - 02:23:08 | 404 |       4.526µs |       127.0.0.1 | HEAD     "/api/tags/"
+[GIN] 2025/11/30 - 02:23:20 | 404 |       4.953µs |       127.0.0.1 | HEAD     "/api/articles"
+[GIN] 2025/11/30 - 02:23:28 | 404 |       4.614µs |       127.0.0.1 | HEAD     "/api/articles"
+[GIN] 2025/11/30 - 02:24:42 | 404 |      13.203µs |     10.2.28.163 | GET      "/"
+[GIN] 2025/11/30 - 02:24:42 | 404 |       8.319µs |     10.2.28.163 | GET      "/"
+[GIN] 2025/11/30 - 02:24:42 | 404 |       3.359µs |     10.2.28.163 | GET      "/sitemap.xml"
+[GIN] 2025/11/30 - 02:24:42 | 404 |       3.625µs |     10.2.28.163 | GET      "/robots.txt"
