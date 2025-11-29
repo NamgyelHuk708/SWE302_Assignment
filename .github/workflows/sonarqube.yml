@@ -56,6 +56,7 @@ jobs:
             -Dsonar.tests=.
             -Dsonar.test.inclusions=**/*_test.go
             -Dsonar.go.coverage.reportPaths=coverage.out
+            -Dsonar.scm.disabled=true
 
   sonarqube-frontend:
     name: SonarQube Frontend (React)
@@ -101,3 +102,4 @@ jobs:
             -Dsonar.test.inclusions=**/*.test.js,**/*.spec.js
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
             -Dsonar.exclusions=**/*.test.js,**/*.spec.js,**/node_modules/**,**/coverage/**
+            -Dsonar.scm.disabled=true
