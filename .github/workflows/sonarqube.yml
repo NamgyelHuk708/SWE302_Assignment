@@ -50,6 +50,7 @@ jobs:
           args: >
             -Dsonar.projectKey=NamgyelHuk708_SWE302_Assignment_backend
             -Dsonar.organization=namgyelhuk708
+            -Dsonar.branch.name=main
             -Dsonar.sources=.
             -Dsonar.exclusions=**/*_test.go,**/vendor/**
             -Dsonar.tests=.
@@ -94,6 +95,7 @@ jobs:
           args: >
             -Dsonar.projectKey=NamgyelHuk708_SWE302_Assignment_frontend
             -Dsonar.organization=namgyelhuk708
+            -Dsonar.branch.name=main
             -Dsonar.sources=src
             -Dsonar.tests=src
             -Dsonar.test.inclusions=**/*.test.js,**/*.spec.js
