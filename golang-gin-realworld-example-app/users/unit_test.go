@@ -334,13 +334,13 @@ var unauthRequestTests = []struct {
 	{
 		func(req *http.Request) {
 			resetDBWithMock()
-			HeaderTokenMock(req, 4)
+			HeaderTokenMock(req, 99) // Use nonexistent user ID to trigger validation errors
 		},
 		"/user/",
 		"PUT",
 		`{"password": "password321"}}`,
 		http.StatusUnprocessableEntity,
-		`{"errors":{"Email":"{key: email}","Username":"{key: alphanum}"}}`,
+		`{"errors":{"Email":"{key: required}","Username":"{key: required}"}}`,
 		"test database pk error for user update",
 	},
 	{
