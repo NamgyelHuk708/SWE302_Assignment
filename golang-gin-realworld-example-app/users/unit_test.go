@@ -482,6 +482,9 @@ func TestWithoutAuth(t *testing.T) {
 //This is a hack way to add test database for each case, as whole test will just share one database.
 //You can read TestWithoutAuth's comment to know how to not share database each case.
 func TestMain(m *testing.M) {
+	// Clean up any existing test database
+	os.Remove("./../gorm_test.db")
+	
 	test_db = common.TestDBInit()
 	AutoMigrate()
 	exitVal := m.Run()
