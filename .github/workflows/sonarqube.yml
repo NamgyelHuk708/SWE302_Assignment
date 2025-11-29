@@ -45,12 +45,12 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: https://sonarcloud.io
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           projectBaseDir: golang-gin-realworld-example-app
           args: >
             -Dsonar.projectKey=NamgyelHuk708_SWE302_Assignment_backend
             -Dsonar.organization=namgyelhuk708
-            -Dsonar.branch.name=main
             -Dsonar.sources=.
             -Dsonar.exclusions=**/*_test.go,**/vendor/**
             -Dsonar.tests=.
@@ -90,12 +90,12 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: https://sonarcloud.io
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           projectBaseDir: react-redux-realworld-example-app
           args: >
             -Dsonar.projectKey=NamgyelHuk708_SWE302_Assignment_frontend
             -Dsonar.organization=namgyelhuk708
-            -Dsonar.branch.name=main
             -Dsonar.sources=src
             -Dsonar.tests=src
             -Dsonar.test.inclusions=**/*.test.js,**/*.spec.js
