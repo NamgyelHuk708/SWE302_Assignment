@@ -1,0 +1,80 @@
+name: SonarQube Analysis
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  sonarqube-backend:
+    name: SonarQube Backend (Go)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for better analysis
+      
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+      
+      - name: Run tests with coverage
+        working-directory: ./golang-gin-realworld-example-app
+        run: |
+          go test ./... -coverprofile=coverage.out
+          go tool cover -func=coverage.out
+      
+      - name: SonarQube Scan - Backend
+        uses: SonarSource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
+        with:
+          projectBaseDir: golang-gin-realworld-example-app
+          args: >
+            -Dsonar.projectKey=NamgyelHuk708_SWE302_Assignment_backend
+            -Dsonar.organization=namgyelhuk708
+            -Dsonar.sources=.
+            -Dsonar.exclusions=**/*_test.go,**/vendor/**
+            -Dsonar.tests=.
+            -Dsonar.test.inclusions=**/*_test.go
+            -Dsonar.go.coverage.reportPaths=coverage.out
+
+  sonarqube-frontend:
+    name: SonarQube Frontend (React)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        working-directory: ./react-redux-realworld-example-app
+        run: npm ci
+      
+      - name: Run tests with coverage
+        working-directory: ./react-redux-realworld-example-app
+        run: CI=true npm test -- --coverage --watchAll=false || true
+      
+      - name: SonarQube Scan - Frontend
+        uses: SonarSource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
+        with:
+          projectBaseDir: react-redux-realworld-example-app
+          args: >
+            -Dsonar.projectKey=NamgyelHuk708_SWE302_Assignment_frontend
+            -Dsonar.organization=namgyelhuk708
+            -Dsonar.sources=src
+            -Dsonar.tests=src
+            -Dsonar.test.inclusions=**/*.test.js,**/*.spec.js
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.exclusions=**/*.test.js,**/*.spec.js,**/node_modules/**,**/coverage/**
