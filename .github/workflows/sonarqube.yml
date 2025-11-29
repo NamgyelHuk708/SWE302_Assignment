@@ -30,6 +30,13 @@ jobs:
           go test ./... -coverprofile=coverage.out
           go tool cover -func=coverage.out
       
+      - name: Create SonarCloud project if not exists
+        continue-on-error: true
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.SONAR_TOKEN }}" \
+            "https://sonarcloud.io/api/projects/create?project=NamgyelHuk708_SWE302_Assignment_backend&name=SWE302+Assignment+-+Backend&organization=namgyelhuk708"
+      
       - name: SonarQube Scan - Backend
         uses: SonarSource/sonarqube-scan-action@master
         env:
@@ -66,6 +73,13 @@ jobs:
       - name: Run tests with coverage
         working-directory: ./react-redux-realworld-example-app
         run: CI=true npm test -- --coverage --watchAll=false || true
+      
+      - name: Create SonarCloud project if not exists
+        continue-on-error: true
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.SONAR_TOKEN }}" \
+            "https://sonarcloud.io/api/projects/create?project=NamgyelHuk708_SWE302_Assignment_frontend&name=SWE302+Assignment+-+Frontend&organization=namgyelhuk708"
       
       - name: SonarQube Scan - Frontend
         uses: SonarSource/sonarqube-scan-action@master
