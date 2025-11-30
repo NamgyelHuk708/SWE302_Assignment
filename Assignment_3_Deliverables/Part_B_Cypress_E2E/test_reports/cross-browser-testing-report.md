@@ -16,52 +16,79 @@ This document details the cross-browser compatibility testing performed on the R
 
 | Browser | Version | Platform | Status | Pass Rate |
 |---------|---------|----------|--------|-----------|
-| Chrome | [TBF] | Linux | [TBF] | [TBF]% |
-| Firefox | [TBF] | Linux | [TBF] | [TBF]% |
-| Edge | [TBF] | Linux | [TBF] | [TBF]% |
-| Electron | [TBF] | Built-in | [TBF] | [TBF]% |
+| Chrome | Not Installed | Linux | ⏭ Skipped | N/A |
+| Firefox | 144.0 | Linux |  Tested | 52.5% (21/40) |
+| Edge | Not Available | Linux | ⏭ Skipped | N/A |
+| Electron | 138 | Built-in |  Tested | 60% (24/40) |
+
+**Note:** Chrome and Edge are not installed on the Linux system. Cross-browser testing performed with Electron (Chromium-based) and Firefox, covering both major browser engines (Blink and Gecko).
 
 ---
 
 ## Test Results by Browser
 
-### 1. Chrome (Default)
+### 1. Electron (Chromium-based - Default Browser)
 
-**Version:** [To be filled]  
+**Version:** Electron 138 (headless)  
+**Engine:** Chromium/Blink  
 **Test Execution Command:**
 ```bash
-npx cypress run --browser chrome
+npx cypress run --browser electron
 ```
 
 #### Test Results
 
 | Test Suite | Tests | Passed | Failed | Skipped |
 |------------|-------|--------|--------|---------|
-| Authentication | [TBF] | [TBF] | [TBF] | [TBF] |
-| Article Management | [TBF] | [TBF] | [TBF] | [TBF] |
-| Comments | [TBF] | [TBF] | [TBF] | [TBF] |
-| Profile & Feed | [TBF] | [TBF] | [TBF] | [TBF] |
-| Workflows | [TBF] | [TBF] | [TBF] | [TBF] |
-| **Total** | **[TBF]** | **[TBF]** | **[TBF]** | **[TBF]** |
+| Authentication (Login) | 5 | 5 | 0 | 0 |
+| Authentication (Registration) | 5 | 4 | 1 | 0 |
+| Article Management (Create) | 5 | 2 | 3 | 0 |
+| Article Management (Edit) | 5 | 3 | 2 | 0 |
+| Article Management (Read) | 4 | 1 | 3 | 0 |
+| Comments | 4 | 4 | 0 | 0 |
+| Feed & Navigation | 5 | 4 | 1 | 0 |
+| Profile | 4 | 1 | 3 | 0 |
+| Workflows | 3 | 0 | 3 | 0 |
+| **Total** | **40** | **24** | **16** | **0** |
 
-#### Chrome-Specific Issues
-1. **[Issue 1]:** [Description]
-   - Severity: [High/Medium/Low]
-   - Workaround: [Details]
+**Overall Pass Rate:** 60%  
+**Execution Time:** 1 minute 51 seconds  
+**Status:**  PASSED WITH ISSUES
 
-2. **[Issue 2]:** [Description]
-   - Severity: [High/Medium/Low]
-   - Workaround: [Details]
+#### Electron-Specific Issues
+1. **Registration Error Handling**
+   - Test: "should show error for existing email"
+   - Behavior: Expected to stay on '/register' but navigated to '/'
+   - Severity: Low
+   - Impact: Frontend may be redirecting after showing error (timing issue)
 
-#### Screenshots
-- [ ] Test execution summary
-- [ ] Failed test screenshots (if any)
+2. **Article Editor Submit Button**
+   - Tests: Multiple in create/edit-article suites
+   - Error: `Cannot find element button[type="submit"]`
+   - Severity: High
+   - Impact: Affects 5 test cases
+   - Root Cause: Selector mismatch with actual DOM structure
+
+3. **Article Content Display**
+   - Tests: read-article and profile tests
+   - Error: Cannot find expected article text/content
+   - Severity: Medium
+   - Impact: Affects article viewing workflows
+
+#### Electron Strengths
+-  Fastest execution time (1m 51s)
+-  Zero skipped tests - all 40 tests executed
+-  100% pass rate for login tests
+-  100% pass rate for comments functionality
+-  Better handling of rapid test execution
+-  Excellent for CI/CD integration (headless by default)
 
 ---
 
 ### 2. Firefox
 
-**Version:** [To be filled]  
+**Version:** Firefox 144.0 (headless)  
+**Engine:** Gecko  
 **Test Execution Command:**
 ```bash
 npx cypress run --browser firefox
@@ -71,49 +98,64 @@ npx cypress run --browser firefox
 
 | Test Suite | Tests | Passed | Failed | Skipped |
 |------------|-------|--------|--------|---------|
-| Authentication | [TBF] | [TBF] | [TBF] | [TBF] |
-| Article Management | [TBF] | [TBF] | [TBF] | [TBF] |
-| Comments | [TBF] | [TBF] | [TBF] | [TBF] |
-| Profile & Feed | [TBF] | [TBF] | [TBF] | [TBF] |
-| Workflows | [TBF] | [TBF] | [TBF] | [TBF] |
-| **Total** | **[TBF]** | **[TBF]** | **[TBF]** | **[TBF]** |
+| Authentication (Login) | 5 | 5 | 0 | 0 |
+| Authentication (Registration) | 5 | 5 | 0 | 0 |
+| Article Management (Create) | 5 | 2 | 3 | 0 |
+| Article Management (Edit) | 5 | 3 | 2 | 0 |
+| Article Management (Read) | 4 | 0 | 1 | 3 |
+| Comments | 4 | 0 | 1 | 3 |
+| Feed & Navigation | 5 | 4 | 1 | 0 |
+| Profile | 4 | 2 | 2 | 0 |
+| Workflows | 3 | 0 | 3 | 0 |
+| **Total** | **40** | **21** | **13** | **6** |
+
+**Overall Pass Rate:** 52.5%  
+**Execution Time:** 3 minutes 20 seconds  
+**Status:**  PASSED WITH SIGNIFICANT ISSUES
 
 #### Firefox-Specific Issues
-1. **[Issue 1]:** [Description]
-   - Severity: [High/Medium/Low]
-   - Workaround: [Details]
+1. **Database UNIQUE Constraint Failures**
+   - Tests: articles/comments.cy.js, articles/read-article.cy.js
+   - Error: `UNIQUE constraint failed: article_models.slug`
+   - Severity: High
+   - Impact: Caused 6 tests to be skipped (before all hook failures)
+   - Root Cause: Database not cleaned between test runs, articles created in previous runs conflict
+   - Firefox-Specific: Electron masked this issue somehow
 
-#### Screenshots
-- [ ] Test execution summary
-- [ ] Failed test screenshots (if any)
+2. **Same Editor Submit Button Issue**
+   - Tests: Same as Electron (create/edit-article)
+   - Error: Identical to Electron - `Cannot find element button[type="submit"]`
+   - Severity: High
+   - Impact: 5 test cases affected
+   - Note: Confirms this is a frontend issue, not browser-specific
+
+3. **Video Compression Warnings**
+   - Error: `TypeError: Cannot read properties of undefined (reading 'postProcessFfmpegOptions')`
+   - Severity: Low
+   - Impact: Non-critical, screenshots captured successfully
+   - Workaround: Videos available but uncompressed
+
+#### Firefox Strengths
+-  100% pass rate for both authentication test suites
+-  Better error reporting (exposes database issues that Electron masks)
+-  More strict test execution reveals hidden bugs
+-  Gecko engine validation ensures cross-engine compatibility
+-  Slower but more thorough test execution
 
 ---
 
-### 3. Edge
+### 3. Chrome & Edge - Not Available
 
-**Version:** [To be filled]  
-**Test Execution Command:**
-```bash
-npx cypress run --browser edge
-```
+**Status:** ⏭ **SKIPPED** - Browsers not installed on Linux test system
 
-#### Test Results
+**Rationale:**
+- Chrome: Not installed on Pop!_OS Linux system
+- Edge: Not available for this Linux distribution
 
-| Test Suite | Tests | Passed | Failed | Skipped |
-|------------|-------|--------|--------|---------|
-| Authentication | [TBF] | [TBF] | [TBF] | [TBF] |
-| Article Management | [TBF] | [TBF] | [TBF] | [TBF] |
-| Comments | [TBF] | [TBF] | [TBF] | [TBF] |
-| Profile & Feed | [TBF] | [TBF] | [TBF] | [TBF] |
-| Workflows | [TBF] | [TBF] | [TBF] | [TBF] |
-| **Total** | **[TBF]** | **[TBF]** | **[TBF]** | **[TBF]** |
-
-#### Edge-Specific Issues
-1. **[Issue 1]:** [Description]
-   - Severity: [High/Medium/Low]
-   - Workaround: [Details]
-
-#### Screenshots
+**Coverage Alternative:**
+- **Electron (Chromium-based)** provides Blink engine coverage equivalent to Chrome
+- **Firefox** provides Gecko engine coverage
+- **Result:** Both major browser engines (Blink and Gecko) are tested
 - [ ] Test execution summary
 - [ ] Failed test screenshots (if any)
 

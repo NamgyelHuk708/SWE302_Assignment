@@ -17,7 +17,7 @@
 **Purpose:** Prevents clickjacking attacks by controlling whether the application can be embedded in frames/iframes.
 
 **Options:**
-- `DENY` - Never allow framing ✅ (Chosen)
+- `DENY` - Never allow framing  (Chosen)
 - `SAMEORIGIN` - Allow framing only from same domain
 - `ALLOW-FROM uri` - Allow framing from specific URI (deprecated)
 
@@ -35,7 +35,7 @@ $ curl -I http://localhost:3000/api/articles
 X-Frame-Options: DENY
 ```
 
-**Browser Support:** All modern browsers ✅
+**Browser Support:** All modern browsers 
 
 ---
 
@@ -62,7 +62,7 @@ c.Header("X-Content-Type-Options", "nosniff")
 
 **Effect:** Forces browsers to respect the `Content-Type` header exactly as specified.
 
-**Browser Support:** All modern browsers ✅
+**Browser Support:** All modern browsers 
 
 ---
 
@@ -75,7 +75,7 @@ c.Header("X-Content-Type-Options", "nosniff")
 **Options:**
 - `0` - Disable XSS filter
 - `1` - Enable XSS filter (sanitize)
-- `1; mode=block` - Enable and block page rendering ✅ (Chosen)
+- `1; mode=block` - Enable and block page rendering  (Chosen)
 
 **Implementation:**
 ```go
@@ -109,10 +109,10 @@ Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' '
 | `connect-src 'self' http://localhost:3000` | API endpoints | Restricts AJAX/fetch destinations |
 
 **Attack Prevention:**
-- ✅ Blocks loading scripts from untrusted domains
-- ✅ Prevents data exfiltration to attacker's server
-- ✅ Limits inline script execution (production: remove 'unsafe-inline')
-- ✅ Mitigates XSS impact even if vulnerability exists
+-  Blocks loading scripts from untrusted domains
+-  Prevents data exfiltration to attacker's server
+-  Limits inline script execution (production: remove 'unsafe-inline')
+-  Mitigates XSS impact even if vulnerability exists
 
 **Implementation:**
 ```go
@@ -142,7 +142,7 @@ Content-Security-Policy:
   report-uri /csp-report;
 ```
 
-**Browser Support:** All modern browsers ✅  
+**Browser Support:** All modern browsers   
 **CSP Level:** Level 2
 
 ---
@@ -210,11 +210,11 @@ c.Header("Referrer-Policy", "strict-origin-when-cross-origin")
 **Policy Options (from most to least restrictive):**
 1. `no-referrer` - Never send referer
 2. `same-origin` - Only to same origin
-3. `strict-origin-when-cross-origin` - Origin only cross-origin ✅ (Chosen)
+3. `strict-origin-when-cross-origin` - Origin only cross-origin  (Chosen)
 4. `strict-origin` - Origin only, no downgrade
-5. `unsafe-url` - Always send full URL (⚠️ dangerous)
+5. `unsafe-url` - Always send full URL ( dangerous)
 
-**Browser Support:** All modern browsers ✅
+**Browser Support:** All modern browsers 
 
 ---
 
@@ -320,20 +320,20 @@ Total Warnings: 8
 ### ZAP Scan - After Implementation
 
 ```
-PASS: Anti-clickjacking Header [10020] ✅
-PASS: X-Content-Type-Options Header Missing [10021] ✅
-PASS: HTTP Server Response Header [10036] ✅
-PASS: Server Leaks via X-Powered-By [10037] ✅
-PASS: Content Security Policy (CSP) Header Not Set [10038] ✅
-PASS: CSP [10055] ✅
-PASS: Permissions Policy Header Not Set [10063] ✅
-PASS: Sub Resource Integrity Attribute Missing [90003] ✅
-PASS: Insufficient Site Isolation Against Spectre [90004] ✅
+PASS: Anti-clickjacking Header [10020] 
+PASS: X-Content-Type-Options Header Missing [10021] 
+PASS: HTTP Server Response Header [10036] 
+PASS: Server Leaks via X-Powered-By [10037] 
+PASS: Content Security Policy (CSP) Header Not Set [10038] 
+PASS: CSP [10055] 
+PASS: Permissions Policy Header Not Set [10063] 
+PASS: Sub Resource Integrity Attribute Missing [90003] 
+PASS: Insufficient Site Isolation Against Spectre [90004] 
 
 Total Warnings: 1 (Storable and Cacheable Content - minor caching suggestion)
 ```
 
-**Improvement: 8/8 warnings resolved (100%)** ✅
+**Improvement: 8/8 warnings resolved (100%)** 
 
 ---
 
@@ -343,13 +343,13 @@ Total Warnings: 1 (Storable and Cacheable Content - minor caching suggestion)
 
 | Threat | Before | After | Protection |
 |--------|--------|-------|------------|
-| Clickjacking | ⚠️ Vulnerable | ✅ Protected | X-Frame-Options |
-| MIME Sniffing | ⚠️ Vulnerable | ✅ Protected | X-Content-Type-Options |
-| XSS (defense-in-depth) | ⚠️ Limited | ✅ Enhanced | CSP + X-XSS-Protection |
-| Information Leakage | ⚠️ Leaking | ✅ Hidden | Removed headers |
-| Feature Exploitation | ⚠️ Enabled | ✅ Disabled | Permissions-Policy |
-| Referer Leaks | ⚠️ Leaking | ✅ Protected | Referrer-Policy |
-| Data Exfiltration | ⚠️ Possible | ✅ Restricted | CSP connect-src |
+| Clickjacking |  Vulnerable |  Protected | X-Frame-Options |
+| MIME Sniffing |  Vulnerable |  Protected | X-Content-Type-Options |
+| XSS (defense-in-depth) |  Limited |  Enhanced | CSP + X-XSS-Protection |
+| Information Leakage |  Leaking |  Hidden | Removed headers |
+| Feature Exploitation |  Enabled |  Disabled | Permissions-Policy |
+| Referer Leaks |  Leaking |  Protected | Referrer-Policy |
+| Data Exfiltration |  Possible |  Restricted | CSP connect-src |
 
 ---
 
@@ -376,12 +376,12 @@ Impact:  0.16% (within margin of error)
 
 | Header | Chrome | Firefox | Safari | Edge | IE11 |
 |--------|--------|---------|--------|------|------|
-| X-Frame-Options | ✅ All | ✅ All | ✅ All | ✅ All | ✅ All |
-| X-Content-Type-Options | ✅ All | ✅ All | ✅ All | ✅ All | ✅ All |
-| X-XSS-Protection | ⚠️ Deprecated | ⚠️ Deprecated | ⚠️ Deprecated | ⚠️ Deprecated | ✅ Yes |
-| CSP Level 2 | ✅ 40+ | ✅ 31+ | ✅ 10+ | ✅ All | ❌ No |
-| Permissions-Policy | ✅ 88+ | ✅ 74+ | ✅ 16.4+ | ✅ 88+ | ❌ No |
-| Referrer-Policy | ✅ 56+ | ✅ 50+ | ✅ 11.1+ | ✅ 79+ | ❌ No |
+| X-Frame-Options |  All |  All |  All |  All |  All |
+| X-Content-Type-Options |  All |  All |  All |  All |  All |
+| X-XSS-Protection |  Deprecated |  Deprecated |  Deprecated |  Deprecated |  Yes |
+| CSP Level 2 |  40+ |  31+ |  10+ |  All |  No |
+| Permissions-Policy |  88+ |  74+ |  16.4+ |  88+ |  No |
+| Referrer-Policy |  56+ |  50+ |  11.1+ |  79+ |  No |
 
 **Fallback:** Older browsers ignore unsupported headers gracefully.
 
@@ -434,7 +434,7 @@ c.Header("Expect-CT",
 ## Testing Tools
 
 ### Validation Tools
-1. **OWASP ZAP** - Automated scanning (used) ✅
+1. **OWASP ZAP** - Automated scanning (used) 
 2. **Security Headers** - https://securityheaders.com (requires public URL)
 3. **Mozilla Observatory** - https://observatory.mozilla.org
 4. **CSP Evaluator** - https://csp-evaluator.withgoogle.com/
@@ -445,10 +445,10 @@ c.Header("Expect-CT",
 curl -I http://localhost:3000/api/articles | grep -iE "(x-frame|x-content|csp|permissions|referrer|powered|server)"
 
 # Verify X-Powered-By removed
-curl -I http://localhost:3000/api/articles | grep -i "x-powered-by" || echo "✅ Removed"
+curl -I http://localhost:3000/api/articles | grep -i "x-powered-by" || echo " Removed"
 
 # Verify Server header removed
-curl -I http://localhost:3000/api/articles | grep -i "^server:" || echo "✅ Removed"
+curl -I http://localhost:3000/api/articles | grep -i "^server:" || echo " Removed"
 ```
 
 ---
@@ -477,18 +477,18 @@ curl -I http://localhost:3000/api/articles | grep -i "^server:" || echo "✅ Rem
 
 All 8 recommended security headers have been successfully implemented in the Go backend, providing **defense-in-depth protection** against common web attacks. The implementation:
 
-✅ **Prevents clickjacking** (X-Frame-Options)  
-✅ **Prevents MIME sniffing** (X-Content-Type-Options)  
-✅ **Mitigates XSS** (CSP + X-XSS-Protection)  
-✅ **Restricts features** (Permissions-Policy)  
-✅ **Protects referer** (Referrer-Policy)  
-✅ **Hides technology** (Removed X-Powered-By, Server)
+ **Prevents clickjacking** (X-Frame-Options)  
+ **Prevents MIME sniffing** (X-Content-Type-Options)  
+ **Mitigates XSS** (CSP + X-XSS-Protection)  
+ **Restricts features** (Permissions-Policy)  
+ **Protects referer** (Referrer-Policy)  
+ **Hides technology** (Removed X-Powered-By, Server)
 
-**Security Improvement: From C to A+ rating** 🏆
+**Security Improvement: From C to A+ rating** 
 
 ---
 
 **Implementation Date**: November 29, 2025  
 **Verified By**: OWASP ZAP 2.28.0  
-**Status**: ✅ All headers implemented and verified
+**Status**:  All headers implemented and verified
 

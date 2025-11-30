@@ -122,7 +122,7 @@ This is **CRITICAL** for the RealWorld application because:
 #### Remediation
 **Recommended Fix:** Migrate to `github.com/golang-jwt/jwt` v4.0.0 or later
 
-⚠️ **Note:** The package `github.com/dgrijalva/jwt-go` is **DEPRECATED**. The maintainer recommends migrating to the community-maintained fork:
+ **Note:** The package `github.com/dgrijalva/jwt-go` is **DEPRECATED**. The maintainer recommends migrating to the community-maintained fork:
 
 ```bash
 # Replace with the maintained fork
@@ -156,9 +156,9 @@ go get github.com/golang-jwt/jwt/v5
 
 ### Outdated Dependencies
 Both vulnerable dependencies have:
-- ✅ Available fixes
-- ✅ Clear upgrade paths
-- ⚠️ Potential breaking changes (especially jwt-go v4.0+)
+-  Available fixes
+-  Clear upgrade paths
+-  Potential breaking changes (especially jwt-go v4.0+)
 
 ### License Issues
 No license issues detected in the scan.
@@ -227,7 +227,7 @@ No license issues detected in the scan.
 
 ## Snyk Dashboard Screenshots
 
-🔗 **View Full Report:** https://app.snyk.io/org/namgyelhuk708/project/59d29dea-c2e0-4229-a919-5532a2459096
+ **View Full Report:** https://app.snyk.io/org/namgyelhuk708/project/59d29dea-c2e0-4229-a919-5532a2459096
 
 Screenshots showing:
 - Overall vulnerability count
@@ -240,10 +240,10 @@ Screenshots showing:
 ## Recommendations
 
 ### Immediate Actions
-1. ✅ Upgrade `golang-jwt/jwt` to v5 (replace dgrijalva/jwt-go)
-2. ✅ Update `go-sqlite3` to v1.14.18
-3. ✅ Run `go mod tidy` to clean up dependencies
-4. ✅ Test thoroughly before deployment
+1.  Upgrade `golang-jwt/jwt` to v5 (replace dgrijalva/jwt-go)
+2.  Update `go-sqlite3` to v1.14.18
+3.  Run `go mod tidy` to clean up dependencies
+4.  Test thoroughly before deployment
 
 ### Long-term Security Practices
 1. Enable Snyk monitoring for continuous vulnerability detection

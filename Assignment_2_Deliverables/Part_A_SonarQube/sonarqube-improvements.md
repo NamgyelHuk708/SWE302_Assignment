@@ -63,7 +63,7 @@ tx := db.Begin()
 if err != nil {
     return err
 }
-defer tx.Rollback() // ✅ Ensures rollback if commit not reached
+defer tx.Rollback() //  Ensures rollback if commit not reached
 // ... operations ...
 tx.Commit()
 ```
@@ -385,7 +385,7 @@ Impact: Maintainability and testability
 
 ## Next Steps
 
-1. ✅ Document findings - COMPLETE
+1.  Document findings - COMPLETE
 2. ⏳ Take screenshots and save
 3. ⏳ Fix critical resource leak issue
 4. ⏳ Review security hotspots (mark as safe)

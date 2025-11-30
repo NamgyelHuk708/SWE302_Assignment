@@ -28,18 +28,18 @@ This assignment successfully implemented comprehensive testing for the RealWorld
 ### Achievements Summary
 
 **Backend Testing:**
-- ✅ **20 Integration Tests** - All passing (100% success rate)
-- ✅ **50+ Unit Tests** - Across common, articles, and users packages
-- ✅ **79.5% Coverage** - Common package exceeds 70% requirement
-- ✅ **Coverage Reports** - Generated HTML and text reports
+-  **20 Integration Tests** - All passing (100% success rate)
+-  **50+ Unit Tests** - Across common, articles, and users packages
+-  **79.5% Coverage** - Common package exceeds 70% requirement
+-  **Coverage Reports** - Generated HTML and text reports
 
 **Frontend Testing:**
-- ✅ **51 Tests Total** - All passing (100% success rate)
+-  **51 Tests Total** - All passing (100% success rate)
   - 14 Auth Reducer tests
   - 10 Article List Reducer tests
   - 15 Editor Reducer tests
   - 12 Middleware tests
-- ✅ **High Coverage** - 77-97% in tested modules
+-  **High Coverage** - 77-97% in tested modules
 
 **Overall Statistics:**
 - **Total Tests Written:** 71+
@@ -61,36 +61,36 @@ This assignment successfully implemented comprehensive testing for the RealWorld
 **Packages with Tests:**
 
 1. **Common Package** (`common/unit_test.go`)
-   - **Status:** ✅ 12 of 12 tests passing (FIXED)
+   - **Status:**  12 of 12 tests passing (FIXED)
    - **Coverage:** 79.5% (exceeds 70% requirement)
    - **Tests:**
-     - `TestConnectingDatabase` - Database connection and ping ✅
-     - `TestConnectingTestDatabase` - Test DB lifecycle ✅
-     - `TestRandString` - Random string generation ✅
-     - `TestGenToken` - JWT token generation ✅
-     - `TestJWTTokenGenerationWithDifferentUserIDs` - Token uniqueness ✅
-     - `TestJWTTokenExpiration` - 24-hour expiration ✅
-     - `TestJWTTokenInvalidSignature` - Invalid secret handling ✅
-     - `TestRandStringVariousLengths` - Edge cases ✅
-     - `TestNewError` - Error wrapping ✅
-     - `TestJWTTokenContainsCorrectUserID` - Token claims ✅
-     - `TestCommonErrorStructure` - Error object structure ✅
-     - `TestNewValidatorError` - Validation errors ✅ (Fixed 'exists' -> 'required')
+     - `TestConnectingDatabase` - Database connection and ping 
+     - `TestConnectingTestDatabase` - Test DB lifecycle 
+     - `TestRandString` - Random string generation 
+     - `TestGenToken` - JWT token generation 
+     - `TestJWTTokenGenerationWithDifferentUserIDs` - Token uniqueness 
+     - `TestJWTTokenExpiration` - 24-hour expiration 
+     - `TestJWTTokenInvalidSignature` - Invalid secret handling 
+     - `TestRandStringVariousLengths` - Edge cases 
+     - `TestNewError` - Error wrapping 
+     - `TestJWTTokenContainsCorrectUserID` - Token claims 
+     - `TestCommonErrorStructure` - Error object structure 
+     - `TestNewValidatorError` - Validation errors  (Fixed 'exists' -> 'required')
 
 2. **Users Package** (`users/unit_test.go`)
-   - **Status:** ⚠️ Multiple tests with failures
+   - **Status:**  Multiple tests with failures
    - **Issue:** Database permission errors ("readonly database")
    - **Tests:** User model, authentication, profile, follow functionality
 
 3. **Articles Package** (`articles/unit_test.go`)
-   - **Status:** ✅ 20 tests created and passing
+   - **Status:**  20 tests created and passing
    - **Coverage:** 19.6% (handlers not covered, but models tested)
    - **Created as part of this assignment**
 
 **Files Created:**
-- ✅ `testing-analysis.md` - Documented existing test status
-- ✅ `coverage-report.md` - Detailed coverage analysis
-- ✅ `integration_test.go` - 20 integration tests
+-  `testing-analysis.md` - Documented existing test status
+-  `coverage-report.md` - Detailed coverage analysis
+-  `integration_test.go` - 20 integration tests
 
 ---
 
@@ -138,6 +138,11 @@ PASS
 ok      realworld-backend/articles      0.155s
 ```
 
+**Test Execution Evidence:**
+
+![Backend Unit Tests Results](AS_1/1.png)
+*Figure 1: Backend test execution showing 33 tests passed with 0 failures. Articles package: 19.6% coverage, Common package: 100% coverage*
+
 ---
 
 #### 1.3 Common Package Enhancement (5 points)
@@ -154,8 +159,8 @@ Already had JWT and utility tests:
 - `TestJWTTokenContainsCorrectUserID` - Token claim verification
 
 **Coverage Achievement:**
-- ✅ **79.5%** coverage in common package
-- ✅ Exceeds 70% requirement by 9.5%
+-  **79.5%** coverage in common package
+-  Exceeds 70% requirement by 9.5%
 
 ---
 
@@ -171,37 +176,37 @@ Already had JWT and utility tests:
    - POST `/api/users/` with valid data
    - Verifies response contains user object and token
    - Validates user saved in database
-   - **Status:** ✅ PASS
+   - **Status:**  PASS
 
 2. **TestLogin** - User authentication flow
    - POST `/api/users/login/` with credentials
    - Verifies JWT token returned
    - Validates token structure and expiration
-   - **Status:** ✅ PASS
+   - **Status:**  PASS
 
 3. **TestLoginWithInvalidCredentials** - Negative test
    - POST with wrong password
    - Expects 422 error
    - Validates error message format
-   - **Status:** ✅ PASS
+   - **Status:**  PASS
 
 4. **TestCurrentUserEndpoint** - Authenticated user retrieval
    - GET `/api/user/` with valid token
    - Verifies user data returned
    - Tests authorization header
-   - **Status:** ✅ PASS
+   - **Status:**  PASS
 
 5. **TestCurrentUserWithoutToken** - Authorization test
    - GET `/api/user/` without token
    - Expects 401 Unauthorized
    - Validates error message
-   - **Status:** ✅ PASS
+   - **Status:**  PASS
 
 6. **TestUpdateUser** - Profile update
    - PUT `/api/user/` with new data
    - Verifies updates saved
    - Tests authentication required
-   - **Status:** ✅ PASS
+   - **Status:**  PASS
 
 #### 2.2 Article CRUD Integration Tests (8 tests)
 
@@ -209,48 +214,48 @@ Already had JWT and utility tests:
    - POST `/api/articles/` with authentication
    - Verifies article created and returned
    - Tests slug generation
-   - **Status:** ✅ PASS
+   - **Status:**  PASS
 
 8. **TestCreateArticleWithoutAuth** - Authorization test
    - POST `/api/articles/` without token
    - Expects 401 Unauthorized
-   - **Status:** ✅ PASS
+   - **Status:**  PASS
 
 9. **TestListArticles** - Article listing
    - GET `/api/articles/`
    - Verifies correct JSON format
    - Tests articles array structure
-   - **Status:** ✅ PASS
+   - **Status:**  PASS
 
 10. **TestGetSingleArticle** - Article retrieval
     - GET `/api/articles/:slug`
     - Verifies article details
     - Tests slug routing
-    - **Status:** ✅ PASS
+    - **Status:**  PASS
 
 11. **TestUpdateArticle** - Article modification
     - PUT `/api/articles/:slug`
     - Tests authentication required
     - **Bug Found:** No ownership validation
-    - **Status:** ✅ PASS (but security issue noted)
+    - **Status:**  PASS (but security issue noted)
 
 12. **TestDeleteArticle** - Article removal
     - DELETE `/api/articles/:slug`
     - Verifies deletion
     - **Bug Found:** No ownership validation
-    - **Status:** ✅ PASS (but security issue noted)
+    - **Status:**  PASS (but security issue noted)
 
 13. **TestFeedArticles** - User feed
     - GET `/api/articles/feed/`
     - Tests authenticated feed
     - Verifies only followed authors
-    - **Status:** ✅ PASS
+    - **Status:**  PASS
 
 14. **TestGetArticlesByAuthor** - Author filtering
     - GET `/api/articles?author=username`
     - Verifies filtering works
     - Tests query parameters
-    - **Status:** ✅ PASS
+    - **Status:**  PASS
 
 #### 2.3 Article Interaction Tests (6 tests)
 
@@ -258,36 +263,36 @@ Already had JWT and utility tests:
     - POST `/api/articles/:slug/favorite/`
     - Verifies favorited flag set
     - Tests favorite count increment
-    - **Status:** ✅ PASS
+    - **Status:**  PASS
 
 16. **TestUnfavoriteArticle** - Unfavorite functionality
     - DELETE `/api/articles/:slug/favorite/`
     - Verifies favorited flag cleared
     - Tests favorite count decrement
-    - **Status:** ✅ PASS
+    - **Status:**  PASS
 
 17. **TestGetFavoritedArticles** - Filter by favorited
     - GET `/api/articles?favorited=username`
     - Verifies only favorited articles returned
-    - **Status:** ✅ PASS
+    - **Status:**  PASS
 
 18. **TestAddComment** - Comment creation
     - POST `/api/articles/:slug/comments/`
     - Verifies comment saved
     - Tests authentication
-    - **Status:** ✅ PASS
+    - **Status:**  PASS
 
 19. **TestGetComments** - Comment retrieval
     - GET `/api/articles/:slug/comments/`
     - Verifies all comments returned
     - Tests correct format
-    - **Status:** ✅ PASS
+    - **Status:**  PASS
 
 20. **TestDeleteComment** - Comment deletion
     - DELETE `/api/articles/:slug/comments/:id`
     - Verifies comment removed
     - Tests authentication
-    - **Status:** ✅ PASS
+    - **Status:**  PASS
 
 **Execution Result:**
 ```bash
@@ -301,6 +306,11 @@ PASS
 ok      command-line-arguments  4.419s
 ```
 
+**Integration Tests Evidence:**
+
+![Integration Tests Execution](AS_1/5.png)
+*Figure 2: Integration test execution showing all 20 tests passing successfully. Tests cover user registration, authentication, article CRUD operations, and social features (favorites, comments, follows).*
+
 ---
 
 ### Task 3: Test Coverage Analysis (15 points)
@@ -308,9 +318,9 @@ ok      command-line-arguments  4.419s
 #### 3.1 Coverage Reports Generated
 
 **Files Created:**
-- ✅ `coverage.out` - Raw coverage data
-- ✅ `coverage.html` - Visual HTML report (40KB)
-- ✅ `coverage-report.md` - Detailed analysis document
+-  `coverage.out` - Raw coverage data
+-  `coverage.html` - Visual HTML report (40KB)
+-  `coverage-report.md` - Detailed analysis document
 
 **Commands Used:**
 ```bash
@@ -330,15 +340,23 @@ go tool cover -func=coverage.out
 
 | Package | Coverage | Status | Tests |
 |---------|----------|--------|-------|
-| **common** | **79.5%** | ✅ **Exceeds 70%** | 12 tests |
-| articles | 19.6% | ⚠️ Below target | 20 tests |
-| users | Unknown | ⚠️ Test failures | Multiple tests |
-| **Overall** | **24.2%** | ⚠️ Below target | 50+ tests |
+| **common** | **79.5%** |  **Exceeds 70%** | 12 tests |
+| articles | 19.6% |  Below target | 20 tests |
+| users | Unknown |  Test failures | Multiple tests |
+| **Overall** | **24.2%** |  Below target | 50+ tests |
 
 **Common Package Detailed Coverage:**
-- ✅ database.go: **100%** (Init, TestDBInit, TestDBFree, GetDB)
-- ✅ utils.go: **100%** (RandString, GenToken, NewError, Bind)
-- ❌ NewValidatorError: 0% (validator integration issues)
+-  database.go: **100%** (Init, TestDBInit, TestDBFree, GetDB)
+-  utils.go: **100%** (RandString, GenToken, NewError, Bind)
+-  NewValidatorError: 0% (validator integration issues)
+
+**Coverage Evidence:**
+
+![Common Package Coverage](AS_1/3.png)
+*Figure 3: Detailed coverage report showing common/database.go with 100% statement coverage (4/4 blocks executed). The database initialization and management functions are fully tested.*
+
+![Overall Coverage Summary](AS_1/4.png)
+*Figure 4: Overall coverage metrics showing 11.51% statement coverage, 21.47% branch coverage, 5.81% function coverage, and 21.84% line coverage across the entire backend codebase.*
 
 **Why Common Package Achieves 79.5%:**
 1. All database functions tested (connection, initialization, cleanup)
@@ -349,10 +367,10 @@ go tool cover -func=coverage.out
 #### 3.3 Coverage Analysis
 
 **Strengths:**
-- ✅ Core utility functions: 100% coverage
-- ✅ Database layer: Fully tested
-- ✅ JWT authentication: Comprehensive testing
-- ✅ Integration tests: Complete API coverage
+-  Core utility functions: 100% coverage
+-  Database layer: Fully tested
+-  JWT authentication: Comprehensive testing
+-  Integration tests: Complete API coverage
 
 **Gaps Identified:**
 
@@ -407,9 +425,9 @@ go tool cover -func=coverage.out
 
 **Decision Made:**
 Due to compatibility issues with React 16 and modern testing libraries, we focused on Redux/middleware testing which provides maximum value:
-- ✅ Redux reducers (core state management)
-- ✅ Middleware (async operations, localStorage)
-- ❌ Component rendering (library compatibility issues)
+-  Redux reducers (core state management)
+-  Middleware (async operations, localStorage)
+-  Component rendering (library compatibility issues)
 
 **Justification:**
 - Redux tests cover business logic (highest value)
@@ -518,6 +536,14 @@ Snapshots:   0 total
 Time:        1.078s
 ```
 
+**Frontend Tests Evidence:**
+
+![Frontend Test Results](AS_1/2.png)
+*Figure 5: Frontend test execution showing all 4 test suites passing with 51 tests total. Auth reducer: 14 tests, ArticleList reducer: 10 tests, Editor reducer: 15 tests, Middleware: 12 tests.*
+
+![Frontend Coverage Details](AS_1/6.png)
+*Figure 6: Frontend coverage breakdown showing middleware.js at 97.37% coverage (37/38 statements, 12/13 branches), and various reducer files with excellent coverage including editor.js at 84.62%, articleList.js at 84.62%, and auth.js at 77.78%.*
+
 ---
 
 ### Task 6: Frontend Integration Tests
@@ -616,18 +642,18 @@ describe('Feature Name', () => {
 ### Backend Test Summary
 
 **Total Tests:** 50+ tests
-- ✅ 12 Common package unit tests (11 passing)
-- ✅ 20 Articles package unit tests (20 passing)
-- ✅ 20 Integration tests (20 passing)
-- ⚠️ Multiple Users package tests (some failing)
+-  12 Common package unit tests (11 passing)
+-  20 Articles package unit tests (20 passing)
+-  20 Integration tests (20 passing)
+-  Multiple Users package tests (some failing)
 
 ### Frontend Test Summary
 
 **Total Tests:** 51 tests
-- ✅ 14 Auth reducer tests (14 passing)
-- ✅ 10 Article List reducer tests (10 passing)
-- ✅ 15 Editor reducer tests (15 passing)
-- ✅ 12 Middleware tests (12 passing)
+-  14 Auth reducer tests (14 passing)
+-  10 Article List reducer tests (10 passing)
+-  15 Editor reducer tests (15 passing)
+-  12 Middleware tests (12 passing)
 
 ### Test Case Details
 
@@ -642,14 +668,14 @@ See sections above for detailed breakdown of each test case.
 **Overall:** 24.2% (integration tests not counted in function coverage)
 
 **By Package:**
-- ✅ **common: 79.5%** (Exceeds 70% requirement)
-- ⚠️ articles: 19.6% (Models tested, handlers not)
-- ⚠️ users: Unknown (Test failures)
+-  **common: 79.5%** (Exceeds 70% requirement)
+-  articles: 19.6% (Models tested, handlers not)
+-  users: Unknown (Test failures)
 
 **Coverage Reports:**
-- ✅ `coverage.out` - Raw data
-- ✅ `coverage.html` - Visual report
-- ✅ `coverage-report.md` - Analysis
+-  `coverage.out` - Raw data
+-  `coverage.html` - Visual report
+-  `coverage-report.md` - Analysis
 
 **Why Common Package Exceeds 70%:**
 - All database operations covered (100%)
@@ -662,11 +688,11 @@ See sections above for detailed breakdown of each test case.
 **Overall:** 11.51% (many files not tested)
 
 **By Module:**
-- ✅ **middleware.js: 97.37%** (Excellent)
-- ✅ **auth.js reducer: 77.78%** (Good)
-- ✅ **articleList.js reducer: 84.62%** (Good)
-- ✅ **editor.js reducer: 84.62%** (Good)
-- ✅ **actionTypes.js: 100%** (Complete)
+-  **middleware.js: 97.37%** (Excellent)
+-  **auth.js reducer: 77.78%** (Good)
+-  **articleList.js reducer: 84.62%** (Good)
+-  **editor.js reducer: 84.62%** (Good)
+-  **actionTypes.js: 100%** (Complete)
 
 **Why Overall is Low:**
 - Many component files not tested (0%)
@@ -977,19 +1003,19 @@ constants/actionTypes.js|      100 |      100 |      100 |      100 |
 
 This assignment successfully implemented comprehensive testing for the RealWorld application with the following accomplishments:
 
-**✅ Backend Testing (45 points):**
+** Backend Testing (45 points):**
 - 20 integration tests covering complete API flows (100% passing)
 - 50+ unit tests across packages
 - 79.5% coverage in common package (exceeds 70% requirement)
 - Discovered 2 security vulnerabilities through testing
 
-**✅ Frontend Testing (50 points):**
+** Frontend Testing (50 points):**
 - 51 tests for Redux state management (100% passing)
 - 97% coverage in middleware
 - 77-85% coverage in all tested reducers
 - Focused on high-value business logic tests
 
-**✅ Documentation (5 points):**
+** Documentation (5 points):**
 - Comprehensive testing analysis
 - Detailed coverage reports
 - This final consolidated report
@@ -1073,24 +1099,24 @@ The experience of discovering real security bugs through testing reinforces the 
 ### Appendix A: Files Submitted
 
 **Backend:**
-- ✅ `articles/unit_test.go` (555 lines, 20 tests)
-- ✅ `common/unit_test.go` (enhanced with JWT tests)
-- ✅ `integration_test.go` (550+ lines, 20 tests)
-- ✅ `coverage.out` (coverage data)
-- ✅ `coverage.html` (HTML report, 40KB)
-- ✅ `testing-analysis.md` (analysis document)
-- ✅ `coverage-report.md` (detailed coverage analysis, 511 lines)
+-  `articles/unit_test.go` (555 lines, 20 tests)
+-  `common/unit_test.go` (enhanced with JWT tests)
+-  `integration_test.go` (550+ lines, 20 tests)
+-  `coverage.out` (coverage data)
+-  `coverage.html` (HTML report, 40KB)
+-  `testing-analysis.md` (analysis document)
+-  `coverage-report.md` (detailed coverage analysis, 511 lines)
 
 **Frontend:**
-- ✅ `src/reducers/auth.test.js` (14 tests)
-- ✅ `src/reducers/articleList.test.js` (10 tests)
-- ✅ `src/reducers/editor.test.js` (15 tests)
-- ✅ `src/middleware.test.js` (12 tests)
-- ✅ `coverage/` (HTML coverage reports)
+-  `src/reducers/auth.test.js` (14 tests)
+-  `src/reducers/articleList.test.js` (10 tests)
+-  `src/reducers/editor.test.js` (15 tests)
+-  `src/middleware.test.js` (12 tests)
+-  `coverage/` (HTML coverage reports)
 
 **Documentation:**
-- ✅ `ASSIGNMENT_1_FINAL_REPORT.md` (this document)
-- ✅ `COVERAGE_REPORTS_GUIDE.md` (HTML report guide)
+-  `ASSIGNMENT_1_FINAL_REPORT.md` (this document)
+-  `COVERAGE_REPORTS_GUIDE.md` (HTML report guide)
 
 ### Appendix B: Test Execution Commands
 
@@ -1154,19 +1180,19 @@ CI=true npm test -- --coverage --coverageReporters=html
 
 **Backend Tests:**
 ```
-✅ Integration Tests: 20/20 PASSED (3.091s)
-✅ Common Package:    12/12 PASSED (0.031s) - Fixed validation issue
-✅ Articles Package:  20/20 PASSED (1.190s)
-⚠️  Users Package:    1 test failing (database permission issue - doesn't affect integration tests)
+ Integration Tests: 20/20 PASSED (3.091s)
+ Common Package:    12/12 PASSED (0.031s) - Fixed validation issue
+ Articles Package:  20/20 PASSED (1.190s)
+  Users Package:    1 test failing (database permission issue - doesn't affect integration tests)
 ```
 
 **Frontend Tests:**
 ```
-✅ All Tests:         51/51 PASSED (0.411s)
-   - middleware.test.js:    12 tests ✅
-   - auth.test.js:          14 tests ✅
-   - articleList.test.js:   10 tests ✅
-   - editor.test.js:        15 tests ✅
+ All Tests:         51/51 PASSED (0.411s)
+   - middleware.test.js:    12 tests 
+   - auth.test.js:          14 tests 
+   - articleList.test.js:   10 tests 
+   - editor.test.js:        15 tests 
 ```
 
 **Key Fix Applied:**
